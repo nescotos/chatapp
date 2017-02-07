@@ -1,0 +1,29 @@
+{
+  "name": "chatapp-socket",
+  "version": "1.0.0",
+  "description": "Socket server for Chatapp ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestor94/chatapp.git"
+  },
+  "keywords": [
+    "socket",
+    "server",
+    "chat"
+  ],
+  "author": "Néstor Escoto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nestor94/chatapp/issues"
+  },
+  "homepage": "https://github.com/nestor94/chatapp#readme",
+  "dependencies": {
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
+  }
+}
