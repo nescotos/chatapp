@@ -41,3 +41,8 @@
     > npm install
     > node index.js
 `
+
+###Requirements
+`
+    > npm install -g mocha
+`

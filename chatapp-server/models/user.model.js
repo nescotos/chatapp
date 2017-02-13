@@ -20,7 +20,7 @@ userSchema.pre('save', function(next){
     return next();
   }
   //Generate the hash
-  bcrypt.hash(user.password, null, null, (err, hash){
+  bcrypt.hash(user.password, null, null, (err, hash) => {
     if(err){
       return next(err);
     }
