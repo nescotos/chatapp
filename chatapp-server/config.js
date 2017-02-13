@@ -8,5 +8,6 @@ module.exports = {
   GENERICERROR: {
     status: false,
     message: 'Something went wrong, try later'
-  }
+  },
+  ENDPOINTAPI: '/api'
 }

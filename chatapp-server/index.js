@@ -19,8 +19,15 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //ROUTES
-const userRouter = require('./routes/user')(express);
-app.use('/api', userRouter);
+const authRouter = require('./routes/auth.route')(express);
+app.use(config.ENDPOINTAPI, authRouter);
+//USE MIDDLEWARE BETWEEN ROUTEES
+const authMiddleware = require('./middlewares/auth.middleware');
+app.use(authMiddleware.checkToken);
+const userRouter = require('./routes/user.route')(express);
+app.use(config.ENDPOINTAPI, userRouter);
+const roomRouter = require('./routes/room.route')(express);
+app.use(config.ENDPOINTAPI, roomRouter);
 //RUNNING
 app.listen(config.PORT, () => {
   console.log('SERVER RUNNING')

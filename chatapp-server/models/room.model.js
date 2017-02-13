@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 var roomSchema = new Schema({
   name: {type: String, required: true, index: {unique: true}},
   description: {type: String},
-  admin: [{type: Schema.Types.ObjectId, ref: 'Users'}],
+  admins: [{type: Schema.Types.ObjectId, ref: 'Users'}],
+  createdAt: {type: Date, required: true, default: Date.now},
   members: [{type: Schema.Types.ObjectId, ref: 'Users'}],
   bannerPicture: {type: String, required: true, default: '/default.jpg'}
 });
