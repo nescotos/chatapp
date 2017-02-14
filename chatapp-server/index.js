@@ -30,5 +30,5 @@ const roomRouter = require('./routes/room.route')(express);
 app.use(config.ENDPOINTAPI, roomRouter);
 //RUNNING
 app.listen(config.PORT, () => {
-  console.log('SERVER RUNNING')
+  console.log('SERVER RUNNING');
 });

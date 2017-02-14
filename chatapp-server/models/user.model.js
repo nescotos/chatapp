@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const validator = require('node-mongoose-validator');
+const mongoosePaginate = require('mongoose-paginate');
 //SCHEMA
 var userSchema = new Schema({
   username: {type: String, required: true, index: {unique: true}},
@@ -36,5 +37,7 @@ userSchema.methods.comparePassword = function(password){
 };
 //VALIDATIONS TO MODEL
 userSchema.path('email').validate(validator.isEmail(), 'Please provide a valid email address');
+//PAGINATION PLUGIN
+userSchema.plugin(mongoosePaginate);
 //EXPORT
 module.exports = mongoose.model('User', userSchema);

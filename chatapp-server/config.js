@@ -9,5 +9,8 @@ module.exports = {
     status: false,
     message: 'Something went wrong, try later'
   },
-  ENDPOINTAPI: '/api'
+  ENDPOINTAPI: '/api',
+  USERPAGINATION: 50,
+  ROOMSPAGINATION: 50,
+  CHATSPAGINATION: 100
 }

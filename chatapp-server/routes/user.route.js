@@ -6,5 +6,7 @@ module.exports = (express) => {
   .get(UserController.getUsers);
   userRouter.route('/user/:id')
   .get(UserController.getSpecificUser);
+  userRouter.route('/me')
+  .get(UserController.me);
   return userRouter;
 };

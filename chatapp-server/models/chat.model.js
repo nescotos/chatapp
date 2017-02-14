@@ -1,6 +1,7 @@
 //REQUIRE
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongoosePaginate = require('mongoose-paginate');
 //SCHEMA
 var chatSchema = new Schema({
   text: {type: String, required: true},
@@ -10,5 +11,7 @@ var chatSchema = new Schema({
 });
 //TEXT INDEX
 chatSchema.index({text: 'text'});
+//MONGOOSE PAGINATION
+chatSchema.plugin(mongoosePaginate);
 //EXPORT
 module.exports = mongoose.model('Chats', chatSchema);

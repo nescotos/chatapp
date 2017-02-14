@@ -5,16 +5,20 @@ const secret = config.SECRET;
 
 var userCtrl = {
 	getUsers: (req, res) => {
-		User.find({}, function(err, users) {
-			if (err) {
-				res.json({
-					status: false,
-					message: 'Something went wrong'
-				});
-			} else {
-				res.json({status: true, users});
-			}
-		})
+		let page;
+		if(!req.query.page || req.query.page < 2){
+			page = 1;
+		}else{
+			page = req.query.page;
+		}
+		let options = {
+			select: '_id email username profilePictue',
+			page: page,
+			limit: config.USERPAGINATION
+		}
+		User.paginate({}, options).then((result) => {
+			res.json({status: true, page: result.page, users: result.docs});
+		});
 	},
   createUser: (req, res) => {
     let user = new User();
@@ -71,6 +75,9 @@ var userCtrl = {
         }
       }
     });
+  },
+  me: (req, res) => {
+    res.json(req.decoded);
   }
 };
 
