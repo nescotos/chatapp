@@ -359,6 +359,46 @@ var roomCtrl = {
 				message: 'User unbanned'
 			});
 		});
+	},
+  getAllUsersFromRoom: (req, res) => {
+    Room.findById(req.params.id).populate({
+      path: 'members',
+      select: 'username profilePictue _id'
+    }).exec((err, users) => {
+      if(err){
+        return res.json(config.GENERICERROR);
+      }
+      return res.json({status: true, users: users.members});
+    });
+  },
+  getAllAdminsFromRoom: (req, res) => {
+    Room.findById(req.params.id).populate({
+      path: 'admins',
+      select: 'username profilePictue _id'
+    }).exec((err, users) => {
+      if(err){
+        return res.json(config.GENERICERROR);
+      }
+      return res.json({status: true, users: users.admins});
+    });
+  },
+  searchRooms: (req, res) => {
+		Room.find({
+			$text: {
+				$search: req.query.query,
+				$language: 'english'
+			}
+		}).sort({
+				createdAt: -1
+		}).select('name description').exec((err, rooms) => {
+			if (err) {
+				return res.json(config.GENERICERROR);
+			}
+			return res.json({
+				status: true,
+				rooms: rooms
+			});
+		});
 	}
 };
 

@@ -40,4 +40,4 @@ userSchema.path('email').validate(validator.isEmail(), 'Please provide a valid e
 //PAGINATION PLUGIN
 userSchema.plugin(mongoosePaginate);
 //EXPORT
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Users', userSchema);

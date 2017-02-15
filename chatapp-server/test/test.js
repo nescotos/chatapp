@@ -7,7 +7,7 @@ const config = require('../config');
 //URL FOR TESTING
 var url = "http://localhost:3000/";
 //If you want this workin you must set with a valid Token
-var testToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YTFlOGE2MTIzYTQ5MTBiYzFmNjg3YyIsInVzZXJuYW1lIjoibmVzY290byIsImlhdCI6MTQ4NzEwNDg3MiwiZXhwIjoxNDg3MTkxMjcyfQ.UGY1chVADuiHyPlBQ-JjFQVU1uIJK3x0hSNYYCutFhU";
+var testToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4YTFlOGE2MTIzYTQ5MTBiYzFmNjg3YyIsInVzZXJuYW1lIjoibmVzY290byIsImlhdCI6MTQ4NzE5NjI3NywiZXhwIjoxNDg3MjgyNjc3fQ.Yj-aGENbqUBUHIeWIpVNfWsP8Qz_WY9Ivd44i1EznvM";
 //TESTING
 describe('Routing', () => {
 	before((done) => {
@@ -248,9 +248,9 @@ describe('Room', () => {
     });
   });
 
-  it('GET /api/rooms/:id should return all the users rooms', (done) => {
+  it('GET /api/user/rooms/:id should return all the users rooms', (done) => {
     request(url)
-    .get('api/rooms/58a1e8a6123a4910bc1f687c?token=' + testToken)
+    .get('api/user/rooms/58a1e8a6123a4910bc1f687c?token=' + testToken)
     .end((err, res) => {
       if(err){
         throw err;
@@ -311,19 +311,97 @@ describe('Room', () => {
   //     done();
   //   });
   // });
-  it('POST /api/room/:id/unban should unban the specified user and add it to blacklist', (done) => {
-    let data = {
-      id : '58a48ebe5ecf8b087c414fb2'
-    };
+  // it('POST /api/room/:id/unban should unban the specified user and add it to blacklist', (done) => {
+  //   let data = {
+  //     id : '58a48ebe5ecf8b087c414fb2'
+  //   };
+  //   request(url)
+  //   .post('api/room/58a3265193ba131b8456a346/unban?token=' + testToken)
+  //   .send(data)
+  //   .end((err, res) => {
+  //     if(err){
+  //       throw err;
+  //     }
+  //     res.status.should.be.equal(200);
+  //     res.body.message.should.be.equal('User unbanned');
+  //     done();
+  //   });
+  // });
+  it('GET /api/room/:id/users/all should return all the users from chat room', (done) => {
     request(url)
-    .post('api/room/58a3265193ba131b8456a346/unban?token=' + testToken)
-    .send(data)
+    .get('api/room/58a3265193ba131b8456a346/users/all?token=' + testToken)
     .end((err, res) => {
       if(err){
         throw err;
       }
       res.status.should.be.equal(200);
-      res.body.message.should.be.equal('User unbanned');
+      res.body.users[0].username.should.be.equal('nescoto');
+      done();
+    });
+  });
+  it('GET /api/room/:id/users/admin should return all the admins from chat room', (done) => {
+    request(url)
+    .get('api/room/58a3265193ba131b8456a346/users/admin?token=' + testToken)
+    .end((err, res) => {
+      if(err){
+        throw err;
+      }
+      res.status.should.be.equal(200);
+      res.body.users[1].username.should.be.equal('lax');
+      done();
+    });
+  });
+  it('GET /api/search/rooms?query=query should return all rooms that fit query', (done) => {
+    request(url)
+    .get('api/search/rooms?query=lvl&token=' + testToken)
+    .end((err, res) => {
+      if(err){
+        throw err;
+      }
+      res.status.should.be.equal(200);
+      res.body.rooms[0].description.should.be.equal('We are the New Mega Developers, all programming languages!');
+      done();
+    });
+  });
+});
+
+describe('Chat', () => {
+  it('GET /api/chat/room/:id should return all the chats from specified room', (done) => {
+    request(url)
+    .get('api/chat/room/58a3265193ba131b8456a346?token=' + testToken)
+    .end((err, res) => {
+      if(err){
+        throw err;
+      }
+      res.status.should.be.equal(200);
+      done();
+    });
+  });
+  // it('POST /api/chat/room/:id should insert new chat on specified room', (done) => {
+  //   let data = {
+  //     text: 'Hi there, this is my new Chat!'
+  //   };
+  //   request(url)
+  //   .post('api/chat/room/58a3265193ba131b8456a346?token=' + testToken)
+  //   .send(data)
+  //   .end((err, res) => {
+  //     if(err){
+  //       throw err;
+  //     }
+  //     res.status.should.be.equal(200);
+  //     res.body.message.should.be.equal('Chat succesfully added');
+  //     done();
+  //   });
+  // });
+  it('GET /api/chat/room/:id/search?query=query should search chats on specified room', (done) => {
+    request(url)
+    .get('api/chat/room/58a3265193ba131b8456a346/search?query=chat&token=' + testToken)
+    .end((err, res) => {
+      if(err){
+        throw err;
+      }
+      res.status.should.be.equal(200);
+      res.body.chats.length.should.be.equal(12);
       done();
     });
   });

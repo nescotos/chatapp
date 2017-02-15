@@ -28,6 +28,8 @@ const userRouter = require('./routes/user.route')(express);
 app.use(config.ENDPOINTAPI, userRouter);
 const roomRouter = require('./routes/room.route')(express);
 app.use(config.ENDPOINTAPI, roomRouter);
+const chatRouter = require('./routes/chat.route')(express);
+app.use(config.ENDPOINTAPI, chatRouter);
 //RUNNING
 app.listen(config.PORT, () => {
   console.log('SERVER RUNNING');

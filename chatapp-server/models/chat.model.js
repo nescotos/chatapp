@@ -5,9 +5,9 @@ const mongoosePaginate = require('mongoose-paginate');
 //SCHEMA
 var chatSchema = new Schema({
   text: {type: String, required: true},
-  user: {type: Schema.Types.ObjectId, ref: 'Users'},
+  user: {type: Schema.Types.ObjectId, ref: 'Users', index: true, required: true},
   createdAt: {type: Date, required: true, default: Date.now},
-  room: {type: Schema.Types.ObjectId, ref: 'Rooms'}
+  room: {type: Schema.Types.ObjectId, ref: 'Rooms', index: true, required: true}
 });
 //TEXT INDEX
 chatSchema.index({text: 'text'});
