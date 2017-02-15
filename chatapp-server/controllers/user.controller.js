@@ -15,7 +15,7 @@ var userCtrl = {
 			select: '_id email username profilePictue',
 			page: page,
 			limit: config.USERPAGINATION
-		}
+		};
 		User.paginate({}, options).then((result) => {
 			res.json({status: true, page: result.page, users: result.docs});
 		});
@@ -40,7 +40,7 @@ var userCtrl = {
     let id = req.params.id;
     User.findById(id, (err, user) => {
       if(err){
-        return res.json(config.GENERICERROR)
+        return res.json(config.GENERICERROR);
       }
       res.json({status: true, user});
     });
@@ -48,9 +48,9 @@ var userCtrl = {
   login: (req, res) => {
     let query;
     if(req.body.username){
-      query = {username: req.body.username}
+      query = {username: req.body.username};
     }else if(req.body.email){
-      query = {email: req.body.email}
+      query = {email: req.body.email};
     }
     User.findOne(query)
     .select('username email password')

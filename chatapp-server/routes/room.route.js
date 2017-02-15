@@ -20,5 +20,17 @@ module.exports = (express) => {
   roomRouter.route('/rooms/:id')
   .get(RoomController.getRoomsByUser);
 
+  roomRouter.route('/room/:id/upgrade')
+  .post(RoomController.upgradeToAdmin);
+
+  roomRouter.route('/room/:id/downgrade')
+  .post(RoomController.removeToAdmin);
+
+  roomRouter.route('/room/:id/ban')
+  .post(RoomController.ban);
+
+  roomRouter.route('/room/:id/unban')
+  .post(RoomController.unban);
+
   return roomRouter;
 };

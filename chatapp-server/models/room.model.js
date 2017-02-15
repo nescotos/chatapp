@@ -9,7 +9,8 @@ var roomSchema = new Schema({
   admins: [{type: Schema.Types.ObjectId, ref: 'Users'}],
   createdAt: {type: Date, required: true, default: Date.now},
   members: [{type: Schema.Types.ObjectId, ref: 'Users'}],
-  bannerPicture: {type: String, required: true, default: '/default.jpg'}
+  bannerPicture: {type: String, required: true, default: '/default.jpg'},
+  blacklist: [{type: Schema.Types.ObjectId, ref: 'Users'}]
 });
 //TEXT INDEX
 roomSchema.index({name: 'text'});

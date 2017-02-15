@@ -13,4 +13,4 @@ module.exports = {
   USERPAGINATION: 50,
   ROOMSPAGINATION: 50,
   CHATSPAGINATION: 100
-}
+};

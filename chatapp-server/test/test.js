@@ -261,4 +261,70 @@ describe('Room', () => {
       done();
     });
   });
+
+	it('POST /api/room/:id/upgrade/ should make the user admin of specific room', (done) => {
+		let data = {
+			id: '58a324da335c1306fc26f7e6'
+		};
+		request(url)
+		.post('api/room/58a3265193ba131b8456a346/upgrade?token=' + testToken)
+    .send(data)
+		.end((err, res) => {
+			if(err){
+				throw err;
+			}
+			res.status.should.be.equal(200);
+			res.body.message.should.be.equal('User is already admin');
+			done();
+		});
+	});
+	// it('POST /api/room/:id/downgrade/ should remove admin of specific room', (done) => {
+	// 	let data = {
+	// 		id: '58a324da335c1306fc26f7e6'
+	// 	};
+	// 	request(url)
+	// 	.post('api/room/58a3265193ba131b8456a346/downgrade?token=' + testToken)
+  //   .send(data)
+	// 	.end((err, res) => {
+	// 		if(err){
+	// 			throw err;
+	// 		}
+	// 		res.status.should.be.equal(200);
+	// 		res.body.message.should.be.equal('Admin removed');
+	// 		done();
+	// 	});
+	// });
+
+  // it('POST /api/room/:id/ban should ban the specified user and add it to blacklist', (done) => {
+  //   let data = {
+  //     id : '58a48ebe5ecf8b087c414fb2'
+  //   };
+  //   request(url)
+  //   .post('api/room/58a3265193ba131b8456a346/ban?token=' + testToken)
+  //   .send(data)
+  //   .end((err, res) => {
+  //     if(err){
+  //       throw err;
+  //     }
+  //     res.status.should.be.equal(200);
+  //     res.body.message.should.be.equal('User banned');
+  //     done();
+  //   });
+  // });
+  it('POST /api/room/:id/unban should unban the specified user and add it to blacklist', (done) => {
+    let data = {
+      id : '58a48ebe5ecf8b087c414fb2'
+    };
+    request(url)
+    .post('api/room/58a3265193ba131b8456a346/unban?token=' + testToken)
+    .send(data)
+    .end((err, res) => {
+      if(err){
+        throw err;
+      }
+      res.status.should.be.equal(200);
+      res.body.message.should.be.equal('User unbanned');
+      done();
+    });
+  });
 });
