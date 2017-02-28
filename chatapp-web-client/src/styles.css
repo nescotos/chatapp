@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+.full-width {
+  width: 100%;
+}
+
+.login-width {
+  width: 40%;
+  margin: auto;
+}
+
+.login-card {
+  display: flex;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}

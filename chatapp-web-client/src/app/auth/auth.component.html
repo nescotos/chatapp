@@ -1,0 +1,35 @@
+<md-tab-group>
+  <md-tab class="login-card" label="LOGIN">
+    <md-card class="login-width">
+      <form>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" mdInput placeholder="Type Username">
+        </md-input-container>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" mdInput placeholder="Type Password" type="password">
+        </md-input-container>
+        <p *ngIf="error.length > 0" class="error-message"><b>{{error}}</b></p>
+        <button (click)="doLogin()" md-raised-button color="primary">LOGIN</button>
+      </form>
+    </md-card>
+  </md-tab>
+  <md-tab label="REGISTER">
+    <md-card class="login-width">
+      <form>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" mdInput placeholder="Type Username">
+        </md-input-container>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="email" type="email" [ngModelOptions]="{standalone: true}" mdInput placeholder="Type Email">
+        </md-input-container>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" mdInput placeholder="Type Password" type="password">
+        </md-input-container>
+        <md-input-container class="full-width">
+          <input [(ngModel)]="verifiedPassword" [ngModelOptions]="{standalone: true}" mdInput placeholder="Verify Password" type="password">
+        </md-input-container>
+        <button md-raised-button color="primary">SIGN UP</button>
+      </form>
+    </md-card>
+  </md-tab>
+</md-tab-group>
